@@ -12,7 +12,7 @@ const Header: React.FC<any> = (props) => {
       case "/about":
         return "About avec useLocation";
       default:
-        return "Page   le nom par defaut";
+        return "Page le nom par defaut";
     }
   };
   return (
