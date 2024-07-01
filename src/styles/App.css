@@ -1,0 +1,134 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -----*/
+/* App */
+/*-----*/
+
+.templateRow {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: #8a8a8a;
+}
+
+.columnOne {
+  display: flex;
+  width: 20%;
+}
+
+.templateColumn {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-color: #555555;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f1d536;
+}
+
+/* --------*/
+/* Sidebar */
+/*---------*/
+
+.text-xl {
+  font-size: 25px;
+  font-weight: 600;
+  text-decoration: underline;
+  padding-bottom: 20px;
+  padding-right: -20px;
+}
+
+.p-4 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 70px;
+  padding-top: 70px;
+}
+
+.logo-tache {
+  padding-left: 15px;
+}
+
+/* ------- */
+/* Header */
+/*------- */
+
+.text-white {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.text-gray-300:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* -----*/
+/* Home */
+/*----- */
+
+.mt-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.text-3xl {
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+/* ----- */
+/* About */
+/*----- */
+
+.mt-5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.text-4xl {
+  font-size: 28px;
+  text-decoration: underline;
+}
