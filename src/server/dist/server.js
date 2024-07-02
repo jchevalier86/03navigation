@@ -58,4 +58,8 @@ app.delete("/tasks/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
     yield Task.findByIdAndDelete(req.params.id);
     res.json({ message: "Task deleted" });
 }));
+app.get("/gettask/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield Task.findById(req.params.id);
+    res.json({ message: "Get task" });
+}));
 app.listen(PORT, () => console.log(`Server, running on port ${PORT}`));
