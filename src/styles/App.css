@@ -132,3 +132,100 @@
   font-size: 28px;
   text-decoration: underline;
 }
+
+/* ------ */
+/* Tasks */
+/* ----- */
+
+.mt-3 {
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+/* --------- */
+/* TasksForm */
+/* --------- */
+
+form {
+  margin: 30px;
+}
+
+.intitule,
+.description,
+.date {
+  border-radius: 10px;
+  width: 500px;
+  padding-left: 5px;
+}
+
+.button-annuler {
+  background-color: #ff0000;
+  border-radius: 5px;
+  width: 100px;
+  color: #ffffff;
+}
+
+.button-creation {
+  background-color: #800080;
+  border-radius: 5px;
+  width: 100px;
+  color: #ffffff;
+}
+
+.button-creation:hover,
+.button-annuler:hover {
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+table {
+  width: 50%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 3px solid #ddd;
+}
+
+th,
+td {
+  background-color: #f2f2f2;
+}
+
+.button-modif {
+  background-color: #800080;
+  border-radius: 5px;
+  width: 100px;
+  color: #ffffff;
+}
+
+.button-suppr {
+  background-color: #ff0000;
+  border-radius: 5px;
+  width: 100px;
+  color: #ffffff;
+}
+
+.titleErrorHidden,
+.dateErrorHidden,
+.descriptionErrorHidden {
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
+}
+
+.titleErrorVisible,
+.dateErrorVisible,
+.descriptionErrorVisible {
+  visibility: visible;
+  color: red;
+}
