@@ -17,14 +17,18 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
-const PORT = 5000;
+// on configure le fichier .env pour le server.js dans le répertoire src/server/.env
+dotenv_1.default.config({ path: path_1.default.resolve(__dirname, ".env") });
 // Middleware
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
+const PORT = process.env.PORT;
 // MongoDB connection
 mongoose_1.default
-    .connect("mongodb://localhost:27017/tasksdb", {
+    .connect(process.env.MONGO_DB_SERVER, {
 //useNewUrlParser: true,
 //useUnifiedTopology: true,
 })

@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../images/taches.png";
-import TaskForm from "../components/TaskForm";
+import TaskForm from "../components/TaskFormObject";
 import { fetchTasks } from "../services/fetchTasks";
 import ITasks from "../interfaces/ITasks";
 
@@ -12,8 +12,8 @@ const Tasks: React.FC = () => {
     <div className="container mx-auto mt-4">
       <img src={Logo} alt="Logo Tâches" width="200" height="500"></img>
       <br />
-      <p className="mt-3">Liste des tâches</p>
       <TaskForm />
+      <p className="mt-3">Liste des tâches</p>
     </div>
   );
 };

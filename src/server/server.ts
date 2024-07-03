@@ -3,17 +3,23 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+import path from "path";
 
 const app = express();
-const PORT = 5000;
+
+// on configure le fichier .env pour le server.js dans le répertoire src/server/.env
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
+const PORT = process.env.PORT;
+
 // MongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/tasksdb", {
+  .connect(process.env.MONGO_DB_SERVER as string, {
     //useNewUrlParser: true,
     //useUnifiedTopology: true,
   })

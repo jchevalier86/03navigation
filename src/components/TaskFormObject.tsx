@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../styles/App.css";
+//import fetchTask from "../services/fetchTasks";
+import ITasks from "../interfaces/ITasks";
 
-const TaskForm: React.FC = () => {
+const TaskFormObject: React.FC = () => {
   // gestion des erreurs
   const [titleErrorVisible, setTitleErrorVisible] =
     useState("titleErrorHidden");
@@ -11,10 +13,12 @@ const TaskForm: React.FC = () => {
   const [dateErrorVisible, setDateErrorVisible] = useState("dateErrorHidden");
 
   // state pour les champs
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dateTask, setDateTask] = useState("");
-  const [done, setDone] = useState(true);
+  //   const [title, setTitle] = useState("");
+  //   const [description, setDescription] = useState("");
+  //   const [dateTask, setDateTask] = useState("");
+  //   const [done, setDone] = useState(true);
+
+  const [taskForm, setTaskForm] = useState<ITasks>({ title: "", date: "" });
 
   enum FormFields {
     StringField,
@@ -25,16 +29,16 @@ const TaskForm: React.FC = () => {
 
   function handleChange<T>(value: T, typeField: number): void {
     if (typeField === FormFields.StringField) {
-      setTitle(value as string);
+      setTaskForm({ ...taskForm, title: value as string });
     }
     if (typeField === FormFields.TextAreaField) {
-      setDescription(value as string);
+      setTaskForm({ ...taskForm, description: value as string });
     }
     if (typeField === FormFields.DateField) {
-      setDateTask(value as string);
+      setTaskForm({ ...taskForm, date: value as string });
     }
     if (typeField === FormFields.CheckBoxField) {
-      setDone(value as boolean);
+      setTaskForm({ ...taskForm, done: value as boolean });
     }
   }
 
@@ -47,21 +51,21 @@ const TaskForm: React.FC = () => {
     let validate = true;
 
     // vérifier que le title n'est pas vide
-    if (title === "") {
+    if (taskForm.title === "") {
       // si erreur l'intitulé, montrer l'erreur
       setTitleErrorVisible("titleErrorVisible");
       validate = false;
     }
 
     // vérifier que la description n'est pas vide
-    if (description === "") {
+    if (taskForm.description === "") {
       // si erreur description, montre l'erreur
       setDescriptionErrorVisible("descriptionErrorVisible");
       validate = false;
     }
 
     // vérifier que la date n'est pas vide
-    if (dateTask === "") {
+    if (taskForm.date === "") {
       // si erreur date, montre l'erreur
       setDateErrorVisible("dateErrorVisible");
       validate = false;
@@ -84,7 +88,7 @@ const TaskForm: React.FC = () => {
             id="intitule"
             placeholder="Intitulé *"
             className="intitule"
-            value={title}
+            value={taskForm.title}
           ></input>
           <div className={titleErrorVisible}>
             Veuillez saisir le champ intitulé
@@ -102,7 +106,7 @@ const TaskForm: React.FC = () => {
             id="description"
             placeholder="Description *"
             className="description"
-            value={description}
+            value={taskForm.description}
           ></textarea>
           <div className={descriptionErrorVisible}>
             Veuillez saisir le champ description
@@ -118,7 +122,7 @@ const TaskForm: React.FC = () => {
             type="date"
             id="date"
             className="date"
-            value={dateTask}
+            value={taskForm.date}
           ></input>
           <div className={dateErrorVisible}>Veuillez saisir le champ date</div>
         </div>
@@ -131,7 +135,7 @@ const TaskForm: React.FC = () => {
           type="checkbox"
           id="checkbox1"
           className="checkbox"
-          checked={done}
+          checked={taskForm.done}
         ></input>
         <label>Done</label>
         <br />
@@ -150,8 +154,68 @@ const TaskForm: React.FC = () => {
           ></input>
         </div>
       </form>
+      {/* <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>DONE</th>
+              <th>INTITULE</th>
+              <th>DESCRIPTION</th>
+              <th>DATE</th>
+              <th>MODIFIER</th>
+              <th>SUPPRIMER</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <td>
+              <input
+                className="checkbox"
+                type="checkbox"
+                id="checkbox1"
+                name="checkbox1"
+              ></input>
+            </td>
+
+            <td>
+              <input
+                className="text-1"
+                type="text"
+                id="text1"
+                name="text1"
+              ></input>
+            </td>
+
+            <td>
+              <input
+                className="text-2"
+                type="text"
+                id="text2"
+                name="text2"
+              ></input>
+            </td>
+
+            <td>
+              <input
+                className="date1"
+                type="date"
+                id="date"
+                name="date"
+              ></input>
+            </td>
+
+            <td>
+              <button className="button-modif">Modifier</button>
+            </td>
+
+            <td>
+              <button className="button-suppr">Supprimer</button>
+            </td>
+          </tbody>
+        </table>
+      </div> */}
     </>
   );
 };
 
-export default TaskForm;
+export default TaskFormObject;

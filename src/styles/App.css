@@ -173,8 +173,7 @@ form {
 }
 
 .button-creation:hover,
-.button-annuler:hover,
-input [type="date"]:hover {
+.button-annuler:hover {
   cursor: pointer;
 }
 
