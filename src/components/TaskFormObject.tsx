@@ -3,7 +3,7 @@ import "../styles/App.css";
 //import fetchTask from "../services/fetchTasks";
 import ITasks from "../interfaces/ITasks";
 
-const TaskFormObject: React.FC = () => {
+const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
   // gestion des erreurs
   const [titleErrorVisible, setTitleErrorVisible] =
     useState("titleErrorHidden");
@@ -71,13 +71,20 @@ const TaskFormObject: React.FC = () => {
       validate = false;
     }
 
+    if (validate) {
+      addTaskInComponentTasks(taskForm);
+    }
+
+    // TODO
+    // envoyer l'objet tâche au parent pour modifier les données
+    // ensuite rappeler dans le parent la liste et l'afficher avec els données créer ou modifier
     return validate;
   }
 
   // au dessus c'est les traitements
   // au dessous c'est le render
   return (
-    <>
+    <div className="body">
       <form onSubmit={modifyTask}>
         <div>
           <input
@@ -85,8 +92,8 @@ const TaskFormObject: React.FC = () => {
               handleChange(event.target.value, FormFields.StringField)
             }
             type="text"
-            id="intitule"
-            placeholder="Intitulé *"
+            id="title"
+            placeholder="Titre *"
             className="intitule"
             value={taskForm.title}
           ></input>
@@ -154,67 +161,7 @@ const TaskFormObject: React.FC = () => {
           ></input>
         </div>
       </form>
-      {/* <div className="table">
-        <table>
-          <thead>
-            <tr>
-              <th>DONE</th>
-              <th>INTITULE</th>
-              <th>DESCRIPTION</th>
-              <th>DATE</th>
-              <th>MODIFIER</th>
-              <th>SUPPRIMER</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <td>
-              <input
-                className="checkbox"
-                type="checkbox"
-                id="checkbox1"
-                name="checkbox1"
-              ></input>
-            </td>
-
-            <td>
-              <input
-                className="text-1"
-                type="text"
-                id="text1"
-                name="text1"
-              ></input>
-            </td>
-
-            <td>
-              <input
-                className="text-2"
-                type="text"
-                id="text2"
-                name="text2"
-              ></input>
-            </td>
-
-            <td>
-              <input
-                className="date1"
-                type="date"
-                id="date"
-                name="date"
-              ></input>
-            </td>
-
-            <td>
-              <button className="button-modif">Modifier</button>
-            </td>
-
-            <td>
-              <button className="button-suppr">Supprimer</button>
-            </td>
-          </tbody>
-        </table>
-      </div> */}
-    </>
+    </div>
   );
 };
 

@@ -41,6 +41,19 @@
 /* App */
 /*-----*/
 
+@media (max-width: 300px) {
+  .body,
+  .mt-4,
+  .templateColumn,
+  .templateRow,
+  .columnOne,
+  .text-3xl,
+  .text-4xl {
+    flex: 100%;
+    background-color: #f1d536;
+  }
+}
+
 .templateRow {
   display: flex;
   flex-direction: row;
@@ -148,6 +161,8 @@
 
 form {
   margin: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .intitule,
@@ -214,6 +229,11 @@ td {
   width: 100px;
   color: #ffffff;
 }
+
+/* .button-modif:hover,
+.button-suppr:hover {
+  cursor: pointer;
+} */
 
 .titleErrorHidden,
 .dateErrorHidden,

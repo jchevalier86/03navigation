@@ -81,8 +81,8 @@ const TaskForm: React.FC = () => {
               handleChange(event.target.value, FormFields.StringField)
             }
             type="text"
-            id="intitule"
-            placeholder="Intitulé *"
+            id="title"
+            placeholder="Titre *"
             className="intitule"
             value={title}
           ></input>
