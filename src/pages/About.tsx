@@ -5,7 +5,7 @@ const Home: React.FC = () => {
     <div className="container mx-auto mt-5">
       <h1 className="text-4xl font-bold">About</h1>
       <br />
-      <p className="mt-3">Bienvenue sur la page à propos !</p>
+      <p className="mt-7">Bienvenue sur la page à propos !</p>
     </div>
   );
 };
