@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import Logo from "../images/taches.png";
 import TaskForm from "../components/TaskFormObject";
 import TaskRow from "../components/TaskRow";
-import { fetchTasks, addTask, deleteTask } from "../services/fetchTasks";
+import {
+  fetchTasks,
+  addTask,
+  deleteTask,
+  updateTaskDone,
+} from "../services/fetchTasks";
 import ITasks from "../interfaces/ITasks";
 
 const Tasks: React.FC = () => {
@@ -55,6 +60,12 @@ const Tasks: React.FC = () => {
     await getAllTasks();
 
     hideModalDelete();
+  };
+
+  const updateTaskCheckbox = async (taskRow: ITasks) => {
+    let taskResult = await updateTaskDone(taskRow);
+    console.log(taskResult);
+    await getAllTasks();
   };
 
   /* ------ */
@@ -135,6 +146,9 @@ const Tasks: React.FC = () => {
                 key={taskRow._id}
                 deleteTaskInComponentTasks={(id: string) =>
                   deleteTaskInComponentTasks(id)
+                }
+                updateTaskCheckbox={(taskRow: ITasks) =>
+                  updateTaskCheckbox(taskRow)
                 }
               />
             );

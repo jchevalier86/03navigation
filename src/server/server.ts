@@ -65,4 +65,13 @@ app.get("/gettask/:id", async (req, res) => {
   res.json({ message: "Get task" });
 });
 
+app.put("/updatetaskdone", async (req, res) => {
+  // where _id=
+  const myquery = { _id: req.body._id };
+  // set done=
+  var newvalues = { $set: { done: req.body.done } };
+  const task = await Task.updateOne(myquery, newvalues);
+  res.json(task);
+});
+
 app.listen(PORT, () => console.log(`Server, running on port ${PORT}`));

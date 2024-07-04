@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/App.css";
 import ITasks from "../interfaces/ITasks";
 
 type Props = {
   taskRow: ITasks;
   deleteTaskInComponentTasks: (_id: string) => void;
+  updateTaskCheckbox: (taskRow: ITasks) => void;
+  setTaskRow: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const TaskRow: React.FC<any> = (props: Props) => {
-  const updateTaskCheckbox = async (value: boolean) => {};
+  // récupérer le props.taskRow pour ensuite pouvoir modifier le checkbox
+  const [taskRow, setTaskRow] = useState(props.taskRow);
+
+  const updateTaskCheckbox = async (doneValue: boolean) => {
+    setTaskRow({ ...taskRow, done: doneValue });
+    console.log("change done value of task");
+    taskRow.done = doneValue;
+    props.updateTaskCheckbox(taskRow);
+  };
 
   const deleteTaskInComponentTasks = async (value: string) => {
-    props.deleteTaskInComponentTasks(props.taskRow._id!);
+    deleteTaskInComponentTasks(taskRow._id!);
   };
 
   return (
@@ -21,7 +31,7 @@ const TaskRow: React.FC<any> = (props: Props) => {
           className="checkbox"
           type="checkbox"
           id="done"
-          checked={props.taskRow.done}
+          checked={taskRow.done}
           onChange={(event) => updateTaskCheckbox(event.target.checked)}
           name="done"
         ></input>
@@ -33,7 +43,7 @@ const TaskRow: React.FC<any> = (props: Props) => {
           className="text-1"
           type="text"
           id="title"
-          value={props.taskRow.title}
+          value={taskRow.title}
           name="title"
         ></input>
       </td>
@@ -43,7 +53,7 @@ const TaskRow: React.FC<any> = (props: Props) => {
           className="text-2"
           type="text"
           id="description"
-          value={props.taskRow.description}
+          value={taskRow.description}
           name="description"
         ></input>
       </td>
@@ -53,13 +63,17 @@ const TaskRow: React.FC<any> = (props: Props) => {
           className="date1"
           type="date"
           id="date"
-          value={props.taskRow.date}
+          value={taskRow.date}
           name="date"
         ></input>
       </td>
 
       <td>
-        <button type="submit" className="button-modif">
+        <button
+          type="submit"
+          // onClick={() => updateTaskCheckbox("modifier")}
+          className="button-modif"
+        >
           Modifier
         </button>
       </td>

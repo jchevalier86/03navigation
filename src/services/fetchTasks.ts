@@ -58,3 +58,18 @@ export const getTaskById = async (id: string) => {
 
   return jsonTask;
 };
+
+// modifier la valeur done de la tâche par rapport à l'id
+export const updateTaskDone = async (task: ITask) => {
+  const response = await fetch(urlServer + "/updatetaskdone/", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...task }),
+  });
+
+  const updatedTask = await response.json();
+
+  return updatedTask;
+};
