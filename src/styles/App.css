@@ -41,7 +41,7 @@
 /* App */
 /*-----*/
 
-@media (max-width: 300px) {
+/* @media (max-width: 300px) {
   .body,
   .mt-4,
   .templateColumn,
@@ -52,12 +52,12 @@
     flex: 100%;
     background-color: #f1d536;
   }
-}
+} */
 
 .templateRow {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 1400px;
   background-color: #8a8a8a;
 }
 
@@ -72,6 +72,7 @@
   border: solid;
   border-color: #555555;
   width: 100%;
+  height: 1400px;
   border-radius: 5px;
   background-color: #f1d536;
 }
@@ -155,12 +156,94 @@
   text-decoration: underline;
 }
 
+#supprimer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#popup {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #f20707;
+  padding: 20px;
+  text-align: center;
+}
+
+#buttonannuler,
+#buttonsvalider {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Noto Sans, sans-serif;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#buttonannuler {
+  color: #7a5cfa;
+}
+
+#buttonannuler:hover {
+  background-color: #ececff;
+}
+
+#buttonsvalider {
+  background-color: #484edf;
+  color: #ffffff;
+}
+
+#buttonsvalider:hover {
+  background-color: #383dbf;
+}
+
+#title {
+  color: #091133;
+  font-size: 24px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+#text,
+#text2 {
+  text-align: center;
+  font-size: 16px;
+  font-family: Noto Sans, sans-serif;
+}
+
+#clear {
+  color: #7a5cfa;
+}
+
+#go {
+  color: #ffffff;
+}
+
+.modalDeleteHidden {
+  visibility: hidden;
+}
+
+.modalDeleteVisible {
+  visibility: visible;
+}
+
 /* --------- */
 /* TasksForm */
 /* --------- */
 
 form {
-  margin: 30px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -197,6 +280,10 @@ form {
   justify-content: space-between;
 }
 
+/* ------- */
+/* TaskRow */
+/* ------- */
+
 table {
   width: 50%;
   border-collapse: collapse;
@@ -229,11 +316,6 @@ td {
   width: 100px;
   color: #ffffff;
 }
-
-/* .button-modif:hover,
-.button-suppr:hover {
-  cursor: pointer;
-} */
 
 .titleErrorHidden,
 .dateErrorHidden,
