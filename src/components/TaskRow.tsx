@@ -14,10 +14,11 @@ const TaskRow: React.FC<any> = (props: Props) => {
   const [taskRow, setTaskRow] = useState(props.taskRow);
 
   const updateTaskCheckbox = async (doneValue: boolean) => {
-    setTaskRow({ ...taskRow, done: doneValue });
-    console.log("change done value of task");
+    const updatedTaskRow = { ...taskRow, done: doneValue };
+    setTaskRow(updatedTaskRow);
     taskRow.done = doneValue;
-    props.updateTaskCheckbox(taskRow);
+    props.updateTaskCheckbox(updatedTaskRow);
+    console.log("change done value of task");
   };
 
   const deleteTaskInComponentTasks = async (value: string) => {
