@@ -41,7 +41,7 @@
 /* App */
 /*-----*/
 
-/* @media (max-width: 300px) {
+@media (max-width: 300px) {
   .body,
   .mt-4,
   .templateColumn,
@@ -52,7 +52,7 @@
     flex: 100%;
     background-color: #f1d536;
   }
-} */
+}
 
 .templateRow {
   display: flex;
