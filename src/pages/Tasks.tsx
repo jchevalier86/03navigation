@@ -21,7 +21,6 @@ const Tasks: React.FC = () => {
   const [taskToPass, setTaskToPass] = useState<ITask>({
     title: "",
     date: "",
-    priority: false,
   });
 
   /* --- */
@@ -30,8 +29,7 @@ const Tasks: React.FC = () => {
 
   const addTaskInComponentTasks = async (
     taskToAdd: ITask,
-    isModifiedValue: boolean,
-    priority: boolean
+    isModifiedValue: boolean
   ) => {
     if (isModifiedValue) {
       //modifier une tâche
@@ -162,6 +160,7 @@ const Tasks: React.FC = () => {
               <th>TITRE</th>
               <th>DESCRIPTION</th>
               <th>DATE</th>
+              <th>PRIORITY</th>
               <th>MODIFIER</th>
               <th>SUPPRIMER</th>
             </tr>

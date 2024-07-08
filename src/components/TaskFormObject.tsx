@@ -31,7 +31,7 @@ const TaskFormObject: React.FC<Props> = ({
   const [taskForm, setTaskForm] = useState<ITask>({
     title: "",
     date: "",
-    priority: false,
+    priority: "",
   });
 
   const [showButtonCreateOrModify, setShowButtonCreateOrModify] = useState("");
@@ -52,7 +52,7 @@ const TaskFormObject: React.FC<Props> = ({
         description: "",
         date: "",
         done: false,
-        priority: false,
+        priority: "",
       });
       setShowButtonCreateOrModify("Créer");
     } else {
@@ -83,7 +83,7 @@ const TaskFormObject: React.FC<Props> = ({
       setTaskForm({ ...taskForm, done: value as boolean });
     }
     if (typeField === FormFields.RadioButtonField) {
-      setTaskForm({ ...taskForm, priority: value as boolean });
+      setTaskForm({ ...taskForm, priority: value as string });
     }
   }
 
@@ -180,28 +180,68 @@ const TaskFormObject: React.FC<Props> = ({
         </div>
         <br />
 
-        <input
-          type="radio"
-          id="oui"
-          name="priority"
-          value="oui"
-          className="priority"
-          onChange={(event) =>
-            handleChange(event.target.checked, FormFields.RadioButtonField)
-          }
-          checked
-        ></input>
+        <div className="priority">
+          <label>Oui</label>
+          <input
+            type="radio"
+            id="Oui"
+            name="priority"
+            value="Oui"
+            className="priority"
+            onClick={(event) =>
+              handleChange(
+                (event.target as HTMLInputElement).value,
+                FormFields.RadioButtonField
+              )
+            }
+            checked={taskForm.priority === "Oui"}
+          ></input>
 
-        <input
-          onChange={(event) =>
-            handleChange(event.target.checked, FormFields.CheckBoxField)
-          }
-          type="checkbox"
-          id="checkbox1"
-          className="checkbox"
-          checked={taskForm.done}
-        ></input>
-        <label>Done</label>
+          <label>Non</label>
+          <input
+            type="radio"
+            id="Non"
+            name="priority"
+            value="Non"
+            className="priority"
+            onClick={(event) =>
+              handleChange(
+                (event.target as HTMLInputElement).value,
+                FormFields.RadioButtonField
+              )
+            }
+            checked={taskForm.priority === "Non"}
+          ></input>
+
+          <label>Peut-être</label>
+          <input
+            type="radio"
+            id="Peut-être"
+            name="priority"
+            value="Peut-être"
+            className="priority"
+            onClick={(event) =>
+              handleChange(
+                (event.target as HTMLInputElement).value,
+                FormFields.RadioButtonField
+              )
+            }
+            checked={taskForm.priority === "Peut-être"}
+          ></input>
+        </div>
+
+        <div className="done">
+          <label>Done</label>
+          <input
+            onChange={(event) =>
+              handleChange(event.target.checked, FormFields.CheckBoxField)
+            }
+            type="checkbox"
+            id="checkbox1"
+            className="checkbox"
+            checked={taskForm.done}
+          ></input>
+        </div>
         <br />
 
         <div className="buttons">

@@ -280,6 +280,13 @@ form {
   justify-content: space-between;
 }
 
+.done,
+.priority {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 /* ------- */
 /* TaskRow */
 /* ------- */

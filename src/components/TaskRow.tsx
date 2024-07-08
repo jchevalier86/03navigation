@@ -53,6 +53,8 @@ const TaskRow: React.FC<Props> = (props: Props) => {
 
       <td>{taskRow.date}</td>
 
+      <td>{taskRow.priority}</td>
+
       <td>
         <button
           type="submit"
