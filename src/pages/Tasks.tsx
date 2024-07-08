@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Logo from "../images/taches.png";
 import TaskForm from "../components/TaskFormObject";
 import TaskRow from "../components/TaskRow";
@@ -7,24 +7,39 @@ import {
   addTask,
   deleteTask,
   updateTaskDone,
+  editTask,
 } from "../services/fetchTasks";
-import ITasks from "../interfaces/ITasks";
+import ITask from "../interfaces/ITasks";
 
 const Tasks: React.FC = () => {
-  const [listTasks, setListTasks] = useState<ITasks[]>([]);
+  const [listTasks, setListTasks] = useState<ITask[]>([]);
   let tasks = fetchTasks;
   console.log(tasks);
   const [modalDeleteStyle, setModalDeleteStyle] = useState("modalDeleteHidden");
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
+  const [isModified, setIsModified] = useState(false);
+  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "" });
 
   /* --- */
   /* Add */
   /* --- */
 
-  const addTaskInComponentTasks = async (taskToAdd: ITasks) => {
-    let tasks = await addTask(taskToAdd);
-    console.log(tasks);
-    // afficher la liste
+  const addTaskInComponentTasks = async (
+    taskToAdd: ITask,
+    isModifiedValue: boolean
+  ) => {
+    if (isModifiedValue) {
+      //modifier une tâche
+      let task = await editTask(taskToAdd);
+      console.log(task);
+      setIsModified(false);
+    } else {
+      //ajouter une tâche
+      let task = await addTask(taskToAdd);
+      console.log(task);
+      setIsModified(false);
+    }
+    //afficher la liste
     await getAllTasks();
   };
 
@@ -62,10 +77,15 @@ const Tasks: React.FC = () => {
     hideModalDelete();
   };
 
-  const updateTaskCheckbox = async (taskRow: ITasks) => {
+  const updateTaskCheckbox = async (taskRow: ITask) => {
     let taskResult = await updateTaskDone(taskRow);
     console.log(taskResult);
     await getAllTasks();
+  };
+
+  const updateTaskRow = async (isModified: boolean, taskRow: ITask) => {
+    setIsModified(isModified);
+    setTaskToPass(taskRow);
   };
 
   /* ------ */
@@ -81,10 +101,11 @@ const Tasks: React.FC = () => {
   // };
 
   //pour récupérer la liste
-  const getAllTasks = async () => {
+  const getAllTasks = useCallback(async () => {
+    setListTasks([]);
     let list = await fetchTasks();
-    setListTasks(list);
-  };
+    setListTasks([...list]);
+  }, []);
 
   // function addTaskInComponentTasks(taskToAdd: ITasks) {
   //   console.log(taskToAdd);
@@ -109,22 +130,23 @@ const Tasks: React.FC = () => {
           </button>
         </div>
       </div>
-      <div>
-        <TaskForm
-          addTaskInComponentTasks={(taskToAdd: ITasks) =>
-            addTaskInComponentTasks(taskToAdd)
-          }
-        />
 
-        <div>
-          {listTasks.map((task: ITasks) => {
-            return (
-              <div key={task._id}>
-                {task.title} {task._id}
-              </div>
-            );
-          })}
-        </div>
+      <TaskForm
+        task={taskToPass}
+        isModified={isModified}
+        addTaskInComponentTasks={(taskToAdd: ITask, isModified: boolean) =>
+          addTaskInComponentTasks(taskToAdd, isModified)
+        }
+      />
+
+      <div>
+        {listTasks.map((task: ITask) => {
+          return (
+            <div key={task._id}>
+              {task.title} {task._id}
+            </div>
+          );
+        })}
       </div>
       <p className="mt-3">Liste des tâches</p>
       <div className="table">
@@ -139,17 +161,20 @@ const Tasks: React.FC = () => {
               <th>SUPPRIMER</th>
             </tr>
           </thead>
-          {listTasks.map((taskRow: ITasks) => {
+          {listTasks.map((taskRow: ITask) => {
             return (
               <TaskRow
                 taskRow={taskRow}
-                key={taskRow._id}
+                updateTaskRow={(isModified: boolean, taskRow: ITask) =>
+                  updateTaskRow(isModified, taskRow)
+                }
                 deleteTaskInComponentTasks={(id: string) =>
                   deleteTaskInComponentTasks(id)
                 }
-                updateTaskCheckbox={(taskRow: ITasks) =>
+                updateTaskCheckbox={(taskRow: ITask) =>
                   updateTaskCheckbox(taskRow)
                 }
+                key={taskRow._id}
               />
             );
           })}

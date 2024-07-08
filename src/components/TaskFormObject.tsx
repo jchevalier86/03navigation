@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/App.css";
-//import fetchTask from "../services/fetchTasks";
-import ITasks from "../interfaces/ITasks";
+// import fetchTask from "../services/fetchTasks";
+import ITask from "../interfaces/ITasks";
 
-const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
+type Props = {
+  addTaskInComponentTasks: (taskRow: ITask, isModified: boolean) => void;
+  isModified: boolean;
+  task: ITask;
+};
+
+const TaskFormObject: React.FC<Props> = ({
+  addTaskInComponentTasks,
+  isModified,
+  task,
+}) => {
   // gestion des erreurs
   const [titleErrorVisible, setTitleErrorVisible] =
     useState("titleErrorHidden");
@@ -18,7 +28,9 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
   //   const [dateTask, setDateTask] = useState("");
   //   const [done, setDone] = useState(true);
 
-  const [taskForm, setTaskForm] = useState<ITasks>({ title: "", date: "" });
+  const [taskForm, setTaskForm] = useState<ITask>({ title: "", date: "" });
+
+  const [showButtonCreateOrModify, setShowButtonCreateOrModify] = useState("");
 
   enum FormFields {
     StringField,
@@ -26,6 +38,25 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
     DateField,
     CheckBoxField,
   }
+
+  useEffect(() => {
+    //state pour les champs
+    if (!isModified) {
+      setTaskForm({ title: "", description: "", date: "", done: false });
+      setShowButtonCreateOrModify("Créer");
+    } else {
+      setTaskForm(task);
+      setShowButtonCreateOrModify("Modifier");
+    }
+  }, [isModified]);
+
+  useEffect(() => {
+    //state pour les champs
+    if (isModified) {
+      setTaskForm(task);
+      //setShowButtonCreateOrModify("Modifier")
+    }
+  }, [task._id]);
 
   function handleChange<T>(value: T, typeField: number): void {
     if (typeField === FormFields.StringField) {
@@ -72,7 +103,7 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
     }
 
     if (validate) {
-      addTaskInComponentTasks(taskForm);
+      addTaskInComponentTasks(taskForm, isModified);
     }
 
     // TODO
@@ -156,7 +187,7 @@ const TaskFormObject: React.FC<any> = ({ addTaskInComponentTasks }) => {
 
           <input
             type="submit"
-            value="Création"
+            value={showButtonCreateOrModify}
             className="button-creation"
           ></input>
         </div>
