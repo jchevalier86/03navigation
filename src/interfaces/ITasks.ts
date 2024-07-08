@@ -4,4 +4,5 @@ export default interface ITasks {
   description?: string;
   date: string;
   done?: boolean;
+  priority: boolean;
 }

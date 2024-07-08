@@ -18,7 +18,11 @@ const Tasks: React.FC = () => {
   const [modalDeleteStyle, setModalDeleteStyle] = useState("modalDeleteHidden");
   const [idTaskToDelete, setIdTaskToDelete] = useState("");
   const [isModified, setIsModified] = useState(false);
-  const [taskToPass, setTaskToPass] = useState<ITask>({ title: "", date: "" });
+  const [taskToPass, setTaskToPass] = useState<ITask>({
+    title: "",
+    date: "",
+    priority: false,
+  });
 
   /* --- */
   /* Add */
@@ -26,7 +30,8 @@ const Tasks: React.FC = () => {
 
   const addTaskInComponentTasks = async (
     taskToAdd: ITask,
-    isModifiedValue: boolean
+    isModifiedValue: boolean,
+    priority: boolean
   ) => {
     if (isModifiedValue) {
       //modifier une tâche

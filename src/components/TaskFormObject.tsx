@@ -28,7 +28,11 @@ const TaskFormObject: React.FC<Props> = ({
   //   const [dateTask, setDateTask] = useState("");
   //   const [done, setDone] = useState(true);
 
-  const [taskForm, setTaskForm] = useState<ITask>({ title: "", date: "" });
+  const [taskForm, setTaskForm] = useState<ITask>({
+    title: "",
+    date: "",
+    priority: false,
+  });
 
   const [showButtonCreateOrModify, setShowButtonCreateOrModify] = useState("");
 
@@ -37,12 +41,19 @@ const TaskFormObject: React.FC<Props> = ({
     TextAreaField,
     DateField,
     CheckBoxField,
+    RadioButtonField,
   }
 
   useEffect(() => {
     //state pour les champs
     if (!isModified) {
-      setTaskForm({ title: "", description: "", date: "", done: false });
+      setTaskForm({
+        title: "",
+        description: "",
+        date: "",
+        done: false,
+        priority: false,
+      });
       setShowButtonCreateOrModify("Créer");
     } else {
       setTaskForm(task);
@@ -70,6 +81,9 @@ const TaskFormObject: React.FC<Props> = ({
     }
     if (typeField === FormFields.CheckBoxField) {
       setTaskForm({ ...taskForm, done: value as boolean });
+    }
+    if (typeField === FormFields.RadioButtonField) {
+      setTaskForm({ ...taskForm, priority: value as boolean });
     }
   }
 
@@ -165,6 +179,18 @@ const TaskFormObject: React.FC<Props> = ({
           <div className={dateErrorVisible}>Veuillez saisir le champ date</div>
         </div>
         <br />
+
+        <input
+          type="radio"
+          id="oui"
+          name="priority"
+          value="oui"
+          className="priority"
+          onChange={(event) =>
+            handleChange(event.target.checked, FormFields.RadioButtonField)
+          }
+          checked
+        ></input>
 
         <input
           onChange={(event) =>

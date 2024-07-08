@@ -21,6 +21,7 @@ const TaskForm: React.FC = () => {
     TextAreaField,
     DateField,
     CheckBoxField,
+    RadioButtonField,
   }
 
   function handleChange<T>(value: T, typeField: number): void {
@@ -34,6 +35,9 @@ const TaskForm: React.FC = () => {
       setDateTask(value as string);
     }
     if (typeField === FormFields.CheckBoxField) {
+      setDone(value as boolean);
+    }
+    if (typeField === FormFields.RadioButtonField) {
       setDone(value as boolean);
     }
   }
