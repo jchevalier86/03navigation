@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { initBrevoTracker } from "./lib/trackerBrevo";
 import "./styles/App.css";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
@@ -9,6 +10,9 @@ import About from "./pages/About";
 
 const App: React.FC = () => {
   const [title, setTitle] = useState("");
+  useEffect(() => {
+    initBrevoTracker();
+  }, []);
   return (
     <Router>
       <div className="templateRow">
