@@ -19,11 +19,11 @@ export function initBrevoTracker() {
   ) {
     (function (k) {
       window.sendinblue[k] = function () {
-        let arg = Array.prototype.slice.call(arguments);
+        var arg = Array.prototype.slice.call(arguments);
         (
           window.sib[k] ||
           function () {
-            let t: any = {};
+            var t: any = {};
             t[k] = arg;
             window.sib.equeue.push(t);
           }
@@ -41,3 +41,5 @@ export function initBrevoTracker() {
   iscript.parentNode?.insertBefore(n, iscript);
   window.sendinblue.page();
 }
+
+export {};
